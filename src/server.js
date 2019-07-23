@@ -26,13 +26,28 @@ app.use('/api/user', userRouter)
 app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
 
-export const start = async () => {
-  try {
-    await connect()
-    app.listen(config.port, () => {
-      console.log(`REST API on http://localhost:${config.port}/api`)
-    })
-  } catch (e) {
-    console.error(e)
-  }
+app.get('/', (req, res) => {
+  res.send({ message: 'hello' })
+})
+
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send({ message: 'ok' })
+})
+
+// export const start = async () => {
+//   try {
+//     await connect()
+//     app.listen(config.port, () => {
+//       console.log(`REST API on http://localhost:${config.port}/api`)
+//     })
+//   } catch (e) {
+//     console.error(e)
+//   }
+// }
+
+export const start = () => {
+  app.listen(3000, () => {
+    console.log('server is on 3000')
+  })
 }
