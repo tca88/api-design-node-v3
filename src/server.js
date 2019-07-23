@@ -8,6 +8,7 @@ import { connect } from './utils/db'
 import userRouter from './resources/user/user.router'
 import itemRouter from './resources/item/item.router'
 import listRouter from './resources/list/list.router'
+import router from './resources/item/item.router'
 
 export const app = express()
 
@@ -26,13 +27,38 @@ app.use('/api/user', userRouter)
 app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
 
+router.get('/me', (req, res) => {
+  res.send({ me: 'hello ' })
+})
+
+//cats
+// const routes = ['get /cat', 'get cat/:id', 'post /cat', 'put /cat/:id', 'delete /cat/:id']
+
+// router.route('/cat')
+// .get()
+// .post()
+
 app.get('/', (req, res) => {
   res.send({ message: 'hello' })
+})
+
+const log = (req, res) => {
+  console.log('logging')
+  next()
+}
+
+app.get('/data', (req, res) => {
+  res.send({ data: [1, 2, 3] })
 })
 
 app.post('/', (req, res) => {
   console.log(req.body)
   res.send({ message: 'ok' })
+})
+
+app.post('/data', (req, res) => {
+  // console.log(req.body)
+  res.send(req.body)
 })
 
 // export const start = async () => {
